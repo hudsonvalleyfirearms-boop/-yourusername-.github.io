@@ -3,30 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hudson Valley Firearms</title>
+    <title>Hudson Valley Arms</title>
     <style>
-        body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4; }
-        header { background:#333; color:white; padding:20px; text-align:center; }
-        nav a { color:white; margin:0 15px; text-decoration:none; font-weight:bold; }
-        main { padding:20px; }
-        footer { background:#333; color:white; text-align:center; padding:10px; position:fixed; width:100%; bottom:0; }
+        /* Reset & basic styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f9f9f9; color: #333; }
+
+        /* Header */
+        header {
+            background: #111;
+            color: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 { font-size: 1.8rem; }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+        nav a:hover { color: #f39c12; }
+
+        /* Hero section */
+        .hero {
+            background: url('https://via.placeholder.com/1920x500') center/cover no-repeat;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            flex-direction: column;
+        }
+        .hero h2 { font-size: 3rem; margin-bottom: 10px; text-shadow: 2px 2px 4px #000; }
+        .hero p { font-size: 1.2rem; text-shadow: 1px 1px 3px #000; }
+
+        /* Products / Featured section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 50px 30px;
+            background: #fff;
+        }
+        .feature {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .feature:hover { transform: scale(1.05); }
+        .feature img { max-width: 100%; border-radius: 5px; margin-bottom: 15px; }
+        .feature h3 { margin-bottom: 10px; }
+        .feature p { font-size: 0.95rem; }
+
+        /* Footer */
+        footer {
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        footer a { color: #f39c12; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
+
+    <!-- Header -->
     <header>
-        <h1>Hudson Valley Firearms</h1>
+        <h1>Hudson Valley Arms</h1>
         <nav>
             <a href="#home">Home</a>
+            <a href="#shop">Shop</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
-    <main>
-        <h2>Welcome to Hudson Valley Firearms!</h2>
-        <p>Your trusted local firearms store in the Hudson Valley. Browse our collection and contact us for more information.</p>
-    </main>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Welcome to Hudson Valley Arms</h2>
+        <p>Your trusted firearms store in the Hudson Valley</p>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="features" id="shop">
+        <div class="feature">
+            <img src="https://via.placeholder.com/300x200" alt="Gun 1">
+            <h3>Handguns</h3>
+            <p>Explore our wide selection of handguns for personal defense and sport shooting.</p>
+        </div>
+        <div class="feature">
+            <img src="https://via.placeholder.com/300x200" alt="Gun 2">
+            <h3>Rifles</h3>
+            <p>Top-quality rifles for hunting, sport, and professional use.</p>
+        </div>
+        <div class="feature">
+            <img src="https://via.placeholder.com/300x200" alt="Gun 3">
+            <h3>Accessories</h3>
+            <p>Everything you need: optics, holsters, ammunition, and more.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        &copy; 2025 Hudson Valley Firearms
+        &copy; 2025 Hudson Valley Arms | <a href="#contact">Contact Us</a>
     </footer>
+
 </body>
 </html>
