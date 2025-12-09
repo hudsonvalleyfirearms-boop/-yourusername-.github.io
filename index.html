@@ -1,119 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hudson Valley Arms</title>
-    <style>
-        /* Reset & basic styles */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background: #f9f9f9; color: #333; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hudson Valley Arms</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+    body { background:#f9f9f9; color:#333; }
 
-        /* Header */
-        header {
-            background: #111;
-            color: #fff;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        header h1 { font-size: 1.8rem; }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: bold;
-        }
-        nav a:hover { color: #f39c12; }
+    /* Header */
+    header {
+      background:#111;
+      color:#fff;
+      padding:15px 30px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    header h1 { font-size:1.8rem; }
+    nav a {
+      color:#fff;
+      text-decoration:none;
+      margin-left:20px;
+      font-weight:bold;
+    }
+    nav a:hover { color:#f39c12; }
 
-        /* Hero section */
-        .hero {
-            background: url('https://via.placeholder.com/1920x500') center/cover no-repeat;
-            height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-            flex-direction: column;
-        }
-        .hero h2 { font-size: 3rem; margin-bottom: 10px; text-shadow: 2px 2px 4px #000; }
-        .hero p { font-size: 1.2rem; text-shadow: 1px 1px 3px #000; }
+    /* Carousel */
+    .carousel {
+      position:relative;
+      max-height:500px;
+      overflow:hidden;
+    }
+    .slides {
+      display:flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .slide {
+      min-width:100%;
+      position:relative;
+      text-align:center;
+      color:#fff;
+    }
+    .slide img {
+      width:100%;
+      height:500px;
+      object-fit:cover;
+    }
+    .slide-text {
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      text-shadow: 2px 2px 4px #000;
+    }
+    .slide-text h2 { font-size:2.5rem; margin-bottom:10px; }
+    .slide-text p { font-size:1.2rem; }
 
-        /* Products / Featured section */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 50px 30px;
-            background: #fff;
-        }
-        .feature {
-            background: #f4f4f4;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        .feature:hover { transform: scale(1.05); }
-        .feature img { max-width: 100%; border-radius: 5px; margin-bottom: 15px; }
-        .feature h3 { margin-bottom: 10px; }
-        .feature p { font-size: 0.95rem; }
+    /* Featured Gun of the Month */
+    .featured-gun {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content: center;
+      align-items:center;
+      background:#fff;
+      padding:50px 30px;
+      gap:30px;
+    }
+    .featured-gun img {
+      max-width:500px;
+      width:100%;
+      border-radius:8px;
+    }
+    .featured-gun-content {
+      max-width:500px;
+    }
+    .featured-gun-content h2 {
+      font-size:2rem;
+      margin-bottom:15px;
+    }
+    .featured-gun-content p {
+      font-size:1.1rem;
+      margin-bottom:20px;
+    }
+    .featured-gun-content a {
+      display:inline-block;
+      padding:12px 25px;
+      background:#f39c12;
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      border-radius:5px;
+      transition: background 0.3s;
+    }
+    .featured-gun-content a:hover { background:#d35400; }
 
-        /* Footer */
-        footer {
-            background: #111;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-        }
-        footer a { color: #f39c12; text-decoration: none; }
-        footer a:hover { text-decoration: underline; }
-    </style>
+    /* Featured Products */
+    .features {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap:20px;
+      padding:50px 30px;
+      background:#f4f4f4;
+    }
+    .feature {
+      background:#fff;
+      border-radius:8px;
+      overflow:hidden;
+      text-align:center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .feature:hover { transform: scale(1.05); box-shadow:0 8px 20px rgba(0,0,0,0.2);}
+    .feature img { width:100%; height:200px; object-fit:cover; }
+    .feature h3 { margin:15px 0 10px 0; }
+    .feature p { font-size:0.95rem; padding:0 10px 15px 10px; }
+
+    /* Footer */
+    footer {
+      background:#111;
+      color:#fff;
+      text-align:center;
+      padding:20px;
+    }
+    footer a { color:#f39c12; text-decoration:none; }
+    footer a:hover { text-decoration:underline; }
+
+    /* Carousel navigation */
+    .prev, .next {
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      background:rgba(0,0,0,0.5);
+      color:white;
+      font-size:2rem;
+      padding:10px;
+      cursor:pointer;
+      border:none;
+      border-radius:50%;
+    }
+    .prev { left:20px; }
+    .next { right:20px; }
+
+    /* Responsive */
+    @media (max-width:768px){
+      .featured-gun { flex-direction:column; }
+      .featured-gun img, .featured-gun-content { max-width:100%; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <h1>Hudson Valley Arms</h1>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#shop">Shop</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+  <!-- Header -->
+  <header>
+    <h1>Hudson Valley Arms</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h2>Welcome to Hudson Valley Arms</h2>
-        <p>Your trusted firearms store in the Hudson Valley</p>
-    </section>
+  <!-- Carousel / Hero Slider -->
+  <section class="carousel">
+    <div class="slides">
+      <div class="slide">
+        <img src="https://via.placeholder.com/1920x500?text=Banner+1" alt="Banner 1">
+        <div class="slide-text">
+          <h2>Hudson Valley Arms</h2>
+          <p>Your trusted firearms store in the Hudson Valley</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="https://via.placeholder.com/1920x500?text=Banner+2" alt="Banner 2">
+        <div class="slide-text">
+          <h2>Top-Quality Firearms</h2>
+          <p>Handguns, rifles, and accessories for every enthusiast</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="https://via.placeholder.com/1920x500?text=Banner+3" alt="Banner 3">
+        <div class="slide-text">
+          <h2>Expert Advice & Service</h2>
+          <p>Helping you find the perfect firearms and gear</p>
+        </div>
+      </div>
+    </div>
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+  </section>
 
-    <!-- Featured Products -->
-    <section class="features" id="shop">
-        <div class="feature">
-            <img src="https://via.placeholder.com/300x200" alt="Gun 1">
-            <h3>Handguns</h3>
-            <p>Explore our wide selection of handguns for personal defense and sport shooting.</p>
-        </div>
-        <div class="feature">
-            <img src="https://via.placeholder.com/300x200" alt="Gun 2">
-            <h3>Rifles</h3>
-            <p>Top-quality rifles for hunting, sport, and professional use.</p>
-        </div>
-        <div class="feature">
-            <img src="https://via.placeholder.com/300x200" alt="Gun 3">
-            <h3>Accessories</h3>
-            <p>Everything you need: optics, holsters, ammunition, and more.</p>
-        </div>
-    </section>
+  <!-- Featured Gun of the Month -->
+  <section class="featured-gun">
+    <img src="https://via.placeholder.com/500x350?text=Featured+Gun" alt="Featured Gun">
+    <div class="featured-gun-content">
+      <h2>Featured Gun of the Month</h2>
+      <p>Check out our latest hand-selected firearm of the month. Top quality, reliable, and perfect for enthusiasts or personal defense.</p>
+      <a href="#shop">View Product</a>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-        &copy; 2025 Hudson Valley Arms | <a href="#contact">Contact Us</a>
-    </footer>
+  <!-- Featured Products -->
+  <section class="features" id="shop">
+    <div class="feature">
+      <img src="https://via.placeholder.com/300x200?text=Handguns" alt="Handguns">
+      <h3>Handguns</h3>
+      <p>Explore our selection of handguns for defense, competition, and recreation.</p>
+    </div>
+    <div class="feature">
+      <img src="https://via.placeholder.com/300x200?text=Rifles" alt="Rifles">
+      <h3>Rifles</h3>
+      <p>Top-quality rifles for hunting, sport, and professional use.</p>
+    </div>
+    <div class="feature">
+      <img src="https://via.placeholder.com/300x200?text=Accessories" alt="Accessories">
+      <h3>Accessories</h3>
+      <p>Everything you need: optics, holsters, ammunition, and more.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Hudson Valley Arms | <a href="#contact">Contact Us</a>
+  </footer>
+
+  <!-- Carousel JS -->
+  <script>
+    const slides = document.querySelector('.slides');
+    const slide = document.querySelectorAll('.slide');
+    let index = 0;
+
+    const next = () => {
+      index = (index + 1) % slide.length;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    const prev = () => {
+      index = (index - 1 + slide.length) % slide.length;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    document.querySelector('.next').addEventListener('click', next);
+    document.querySelector('.prev').addEventListener('click', prev);
+
+    // Auto-slide every 5 seconds
+    setInterval(next, 5000);
+  </script>
 
 </body>
 </html>
